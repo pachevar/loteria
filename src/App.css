@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,182 @@
   to {
     transform: rotate(360deg);
   }
+} */
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+   /*box-sizing evita que el contenido se salga del contenedor, es muy usado  */
+}
+nav {
+  background: rgb(206, 213, 0);
+  border-radius: 20px;
+  height: 100px;
+  width: 100%;
+}
+.enlace {
+  position: absolute;
+  padding: 15px 0 5px 25px;
+}
+
+.logo {
+  width: 120px;
+     
+}
+
+nav ul {
+  float: right;
+  margin-right: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  padding-top: 18px;
+  line-height: 70px;
+  margin: 0 5px;
+}
+nav ul li a{
+  color: rgb(99, 3, 90);
+  font-size: 18px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+li a.active, li a:hover {
+  background: rgb(99, 3, 90);
+  color: white;
+  transition: .5s;    
+}
+.checkmenu {
+  font-size: 30px;
+  color: rgb(99, 3, 90);
+  float: right;
+  line-height: 110px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+#check{
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  nav ul li a{
+      font-size: 16px; 
+  }
+}
+
+@media (max-width: 920px) {
+    .checkmenu{
+      display: block;
+  }
+  ul {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgb(99, 3, 90);
+      top: 100px;
+      left: -100%;text-align: center;
+      transition: all 0.6s;
+  }
+  nav ul li {
+      display: block;
+      margin: 50px 0;
+      line-height: 3px;
+  }
+  nav ul li a{
+      color: white;
+      font-size: 20px;
+  }
+  li a:hover, li a.active{
+      background: none;
+      color: rgb(206, 213, 0);
+  }
+  #check:checked ~ ul{
+      left: 0;
+  }
+}
+
+body {
+  background-color: rgb(176, 86, 215);
+
+}
+
+#instruc {
+  border-radius: 30px;
+  margin: 0 30% 0 30%;
+  background-color: #fff;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  text-align: center;
+}
+
+@media screen and (max-width: 780px) {
+  #instruc {
+    font-size: 10px;
+   }
+}
+
+
+#boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botongirar {
+background-color: initial;
+background-image: linear-gradient(#8614f8 0, #760be0 100%);
+border-radius: 5px;
+border-style: none;
+box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-family: Inter, sans-serif;
+font-size: 16px;
+font-weight: 500;
+height: 60px;
+line-height: 60px;
+margin-left: -4px;
+outline: 0;
+text-align: center;
+transition: all .3s cubic-bezier(.05, .03, .35, 1);
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+vertical-align: bottom;
+width: 190px;
+}
+
+.botongirar:hover {
+opacity: .7;
+}
+
+@media screen and (max-width: 1000px) {
+.botongirar {
+  font-size: 14px;
+  height: 55px;
+  line-height: 55px;
+  width: 150px;
+}
+}
+
+.fondo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tombo > img {
+  display: none;
+}
+
+.rndmImage {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
 }
