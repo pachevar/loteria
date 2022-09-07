@@ -204,8 +204,10 @@ opacity: .7;
   justify-content: center;
 }
 
-.tombo > img {
-  display: none;
+.tombo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .rndmImage {

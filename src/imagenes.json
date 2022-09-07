@@ -1,0 +1,10 @@
+[
+    {
+        "numero": 1,
+        "foto": "./assets/img/cadejo.jpg"
+    },
+    {
+        "numero": 2,
+        "foto": "./assets/img/campana.jpg"
+    }
+]
