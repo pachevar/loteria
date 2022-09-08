@@ -2,14 +2,14 @@
 import './App.css';
 import React, { useState } from 'react';
 import logo from './assets/img/logo.png';
-import cadejo from './assets/img/cadejo.jpg';
+// import cadejo from './assets/img/cadejo.jpg';
 import imagenes from './imagenes.json';
 
 function App() {
-  const [arreglo, setArreglo] = useState([0, 1, 2, 3, 4]);
+  const [arreglo] = useState([0, 1, 2, 3, 4]);
   var [cuenta, setCuenta] = useState(arreglo.length);
   var [random, setRandom] = useState();
-  var [imagen, setImagen] = useState();
+  var [imagen, setImagen] = useState('./assets/img/tombola.png');
   
   function handleOnClick(){
     console.log('arreglo: ', arreglo);
@@ -41,11 +41,18 @@ function App() {
     // console.log(suma)
   }
   function searchImage(numero){
+    // let hola = 'hola'
+    // console.log(hola)
+    // setImagen(hola)
+    // console.log('desde imagen: ',imagen)
     // descomentar para que vuelva a funcionar
     let numeroEncontrado = imagenes.filter(element => {
         if(element.numero === numero){
+          console.log(typeof(element.foto))
           console.log(element.foto)
-          // setImagen(element.foto)
+          let foto = element.foto
+          setImagen(foto)
+          console.log('desde search:', imagen)
         }
       } 
     );
@@ -76,14 +83,14 @@ function App() {
         <header>
           <div id="instruc">
             {/* <h1> Para que tu experiencia sea más interesante la tombóla esta en mantenimiento, el viernes 9 de septiembre del 2022 estará lista para que disfrutes de este juego en familia y amigos.</h1> */}
-            <h1> La figura que salio es la # {random}</h1>
+            {/* <h1> La figura que salio es la</h1> */}
                 {/* <img src="img/fondo tombola.png" alt="Figurita"/> */}
 
             <div className="tombo">
+              <img src={require(`${ imagen }`)} alt="Imagen" />   
             </div>
             <div className="fondo">
             </div>
-              <img src={imagen} alt="Imagen" />   
                 {/* <img src="img/1-01.jpg" alt="Cadejo"/>
                 <img src="img/1-02.jpg" alt="La Campana"/>
                 <img src="img/1-03.jpg" alt="El Gringo"/>
