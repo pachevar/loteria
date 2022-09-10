@@ -6,7 +6,7 @@ import logo from './assets/img/logo.png';
 import imagenes from './imagenes.json';
 
 function App() {
-  const [arreglo] = useState([0, 1, 2, 3, 4]);
+  const [arreglo] = useState([0, 1, 2, 3, 4, 5, 6, 7, 9, 10]);
   var [cuenta, setCuenta] = useState(arreglo.length);
   var [random, setRandom] = useState();
   var [imagen, setImagen] = useState('./assets/img/tombola.png');
