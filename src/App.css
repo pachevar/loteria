@@ -216,3 +216,10 @@ opacity: .7;
   width: 100px;
   height: 100px;
 }
+
+ul.lista li {
+  display: inline;
+  padding-right: 0.5em;
+}
+
+

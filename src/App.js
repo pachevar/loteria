@@ -4,63 +4,65 @@ import React, { useState } from 'react';
 import logo from './assets/img/logo.png';
 // import cadejo from './assets/img/cadejo.jpg';
 import imagenes from './imagenes.json';
+// import gif from './assets/img/tombola.gif';
 
 function App() {
-  const [arreglo] = useState([0, 1, 2, 3, 4, 5, 6, 7, 9, 10]);
+  const [arreglo] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]);
   var [cuenta, setCuenta] = useState(arreglo.length);
   var [random, setRandom] = useState();
   var [imagen, setImagen] = useState('./assets/img/tombola.png');
+  var [terminar, setTerminar] = useState(false);
+  var [arregloImagenes, setArregloImagenes] = useState([]);
+
+  const buttons = () => {
+    if(terminar){
+      <div id="boton">
+        <button disabled={terminar} className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
+        <button disabled={!terminar} className="botongirar" onClick={handleOnClick}>Reiniciar</button>
+      </div>
+    } else{
+      <div id="boton">
+        <button disabled={!terminar} className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
+        <button disabled={terminar} className="botongirar" onClick={handleOnClick}>Reiniciar</button>
+      </div>
+    }
+  }
   
   function handleOnClick(){
-    console.log('arreglo: ', arreglo);
-    console.log('cuenta: ', cuenta);
-    console.log('random: ', random )
-    // setCuenta(arreglo.length);
-    // var arreglo = ; 
-    // setCuenta(arreglo.length)
-    // console.log(cuenta)
-    // for (let index = 0; index < array.length; index++) {
-    //   const element = array[index];
-      
-    // }
-    // for (arreglo, cuenta; cuenta--; ) {
+    // esto calcula el numero aleatorio
     var ran = arreglo.splice(Math.floor(Math.random() * (cuenta)), 1)[0];
+    // resta uno a la cuenta de la cantidad de numeros que tiene el arreglo
     setCuenta(cuenta - 1)
-    setRandom(ran)
-    console.log('random: ', random )
-    console.log(ran);
-    console.log('imagenes json:', imagenes)
-    searchImage(ran)
-    // if(ran === 1){
-    //   setImagen(cadejo)
-    // }
-    // }
-    // setArreglo()
-    // console.log('palabra')  
-    // let suma = numero1 + numero2;
-    // console.log(suma)
+    // busco el gif y lo cambio en el path de la imagen
+    setImagen('./assets/img/tombola.gif');
+    // si la cuenta es 0 ya no se puede buscar un numero aleatorio
+    if(cuenta === 0){
+      alert('se terminaron las cartas')
+      setTerminar(true);
+    }else {
+      // detiene el tiempo 3 segundos para hacer aparecer el gif
+      setTimeout(function(){
+        // seteo el numero aleatorio a la variable random
+        setRandom(ran)
+        // busco imagen y la seteo para cambiarla en la pagina
+        searchImage(ran)
+      }, 2000)
+    }
+
+
+    
   }
   function searchImage(numero){
-    // let hola = 'hola'
-    // console.log(hola)
-    // setImagen(hola)
-    // console.log('desde imagen: ',imagen)
-    // descomentar para que vuelva a funcionar
+    // voy a buscar el numero al imagenes.json y seteo el path de la imagen 
+    // a la etiqueta img para que me muestre la foto de la carta
     let numeroEncontrado = imagenes.filter(element => {
         if(element.numero === numero){
-          console.log(typeof(element.foto))
-          console.log(element.foto)
           let foto = element.foto
           setImagen(foto)
-          console.log('desde search:', imagen)
+          arregloImagenes.push(foto);
         }
       } 
     );
-    console.log('numeroencontrado', numeroEncontrado)
-    // este codigo esta bien pero es poco eficiente
-    // if(numero === 1){
-    //   setImagen(cadejo)
-    // }
   }
   return (
     <div className="App">
@@ -88,6 +90,7 @@ function App() {
 
             <div className="tombo">
               <img src={require(`${ imagen }`)} alt="Imagen" />   
+              {/* <img src={gif} alt="gif" />    */}
             </div>
             <div className="fondo">
             </div>
@@ -96,11 +99,17 @@ function App() {
                 <img src="img/1-03.jpg" alt="El Gringo"/>
                 <img src="img/1-04.jpg" alt="El Elote Loco"/> */}
             </div>
-
-            <div id="boton">                
-                <button className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
+            <div id="boton">
+              <button disabled={terminar} className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
+              {/* <button disabled={!terminar} className="botongirar" onClick={handleOnClick}>Reiniciar</button> */}
             </div>
-
+            <ul className='lista'>
+            {arregloImagenes.map(name => (
+              <li>
+                <img height="177px" width="115px" src={require(`${ name }`)} alt="Imag" />  
+              </li>
+            ))}
+            </ul>
             <div className="rndmImage"></div>
         </header>
       </body>
