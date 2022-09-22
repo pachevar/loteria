@@ -134,25 +134,39 @@ li a.active, li a:hover {
 }
 
 body {
-  background-color: rgb(176, 86, 215);
+background: rgb(2,0,36);
+background: linear-gradient(142deg, rgba(2,0,36,1) 0%, rgba(170,0,255,1) 29%, rgba(73,193,255,1) 47%, rgba(65,131,255,0.8239670868347339) 63%, rgba(255,0,108,1) 100%);
 
+}
+
+.titulo {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 15px 5px 5px 5px;
+    color: transparent;
+    background-image: linear-gradient(to left, #f9f10c, #2df700, #0bf6ea, #3d002f, #FFD700);    
+    background-clip: text;
+    animation: color 3s linear infinite;
+    background-size: 500%;    
+}
+
+@keyframes color {
+    from {
+        background-position: 0% 50%;
+    }
+
+    to {
+        background-position: 100% 50%;
+      }
 }
 
 #instruc {
-  border-radius: 30px;
-  margin: 0 30% 0 30%;
-  background-color: #fff;
+  border-radius: 20px;
+  margin: 5px 32% 5px 30%;
+  background-color: rgb(113, 12, 160);
   padding: 10px 10px 10px 10px;
-  display: flex;
-  text-align: center;
-}
-
-@media screen and (max-width: 780px) {
-  #instruc {
-    font-size: 10px;
-   }
-}
-
+  flex-shrink: 0;
+ }
 
 #boton {
   display: flex;
@@ -217,9 +231,17 @@ opacity: .7;
   height: 100px;
 }
 
+
 ul.lista li {
   display: inline;
   padding-right: 0.5em;
 }
 
+@media screen and (max-width: 780px) {
+  .lista {
+  display: inline-block;
+  width: 20%;
+  height: auto;
+   }
+}
 

@@ -63,10 +63,7 @@
         "numero": 16,
         "foto": "./assets/img/1-16.jpg"
     },
-    {
-        "numero": 17,
-        "foto": "./assets/img/1-17.jpg"
-    },
+   
     {
         "numero": 18,
         "foto": "./assets/img/1-18.jpg"
@@ -220,4 +217,5 @@
         "numero": 55,
         "foto": "./assets/img/1-55.jpg"
     }
+  
 ]

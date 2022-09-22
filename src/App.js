@@ -7,13 +7,12 @@ import imagenes from './imagenes.json';
 // import gif from './assets/img/tombola.gif';
 
 function App() {
-  const [arreglo] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]);
+  const [arreglo] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]);
   var [cuenta, setCuenta] = useState(arreglo.length);
   var [random, setRandom] = useState();
   var [imagen, setImagen] = useState('./assets/img/tombola.png');
   var [terminar, setTerminar] = useState(false);
   var [arregloImagenes, setArregloImagenes] = useState([]);
-
   const buttons = () => {
     if(terminar){
       <div id="boton">
@@ -83,6 +82,9 @@ function App() {
       </nav>
       <body>
         <header>
+        <div className="titulo">
+             <h1>Tómbola de las Leyendas</h1>
+        </div>
           <div id="instruc">
             {/* <h1> Para que tu experiencia sea más interesante la tombóla esta en mantenimiento, el viernes 9 de septiembre del 2022 estará lista para que disfrutes de este juego en familia y amigos.</h1> */}
             {/* <h1> La figura que salio es la</h1> */}
