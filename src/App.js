@@ -19,6 +19,7 @@ function App() {
   
   function handleOnClick(){
     audioTombola.play();
+    console.log(random); // Esto evitará el warning, aunque solo lo uses para logging
     // esto calcula el numero aleatorio
     var ran = arreglo.splice(Math.floor(Math.random() * (cuenta)), 1)[0];
     // resta uno a la cuenta de la cantidad de numeros que tiene el arreglo
@@ -69,19 +70,23 @@ function handleReiniciar() {
   setArregloImagenes([]);
 }
 
+function searchImage(numero){
+  // voy a buscar el numero al imagenes.json y seteo el path de la imagen 
+  // a la etiqueta img para que me muestre la foto de la carta
+  let numeroEncontrado = null;
+  
+  imagenes.forEach(element => {
+    if (element.numero === numero) {
+      let foto = element.foto;
+      setImagen(foto);
+      arregloImagenes.push(foto);
+      numeroEncontrado = element; // Ahora número encontrado tiene el elemento correspondiente
+    }
+  });
 
-  function searchImage(numero){
-    // voy a buscar el numero al imagenes.json y seteo el path de la imagen 
-    // a la etiqueta img para que me muestre la foto de la carta
-    let numeroEncontrado = imagenes.filter(element => {
-        if(element.numero === numero){
-          let foto = element.foto
-          setImagen(foto)
-          arregloImagenes.push(foto);
-        }
-      } 
-    );
-  }
+  console.log(numeroEncontrado); // Esto mostrará el objeto encontrado si existe
+}
+
 
   return (
     <div className="App">
@@ -98,8 +103,8 @@ function handleReiniciar() {
       <ul className="menu-items">
         <li><a className="active" href="https://www.lluviadeideaseditorial.com/">Inicio</a></li>
         <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Nosotros</a></li>
-        <li><a href="#">Lotería de las Leyendas</a></li>
-        <li><a href="#">Contacto</a></li>
+        <li><a href="https://www.lluviadeideaseditorial.com/">Lotería de las Leyendas</a></li>
+        <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Contacto</a></li>
       </ul>
     ) : (
       <button className="menu-button" onClick={toggleMenu}>Menú</button>
@@ -112,8 +117,8 @@ function handleReiniciar() {
   <ul className="menu-items-dropdown">
     <li><a className="active" href="https://www.lluviadeideaseditorial.com/">Inicio</a></li>
     <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Nosotros</a></li>
-    <li><a href="#">Lotería de las Leyendas</a></li>
-    <li><a href="#">Contacto</a></li>
+    <li><a href="https://www.lluviadeideaseditorial.com/">Lotería de las Leyendas</a></li>
+    <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Contacto</a></li>
   </ul>
 )}
 </div>
