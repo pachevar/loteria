@@ -33,12 +33,12 @@ function App() {
         searchImage(ran);
         alert('Se terminaron las cartas');
         setTerminar(true);
-      }, 3000);
+      }, 2000);
     } else {
       setTimeout(function() {
         setRandom(ran);
         searchImage(ran);
-      }, 3000);
+      }, 2000);
     }
   }
 
