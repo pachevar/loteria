@@ -1,10 +1,11 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './assets/img/logo.png';
 // import cadejo from './assets/img/cadejo.jpg';
 import imagenes from './imagenes.json';
 // import gif from './assets/img/tombola.gif';
+import sonidoTombola from './audio/tombola_sonido.mp3';
 
 function App() {
   const [arreglo] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]);
@@ -13,21 +14,11 @@ function App() {
   var [imagen, setImagen] = useState('./assets/img/tombola.png');
   var [terminar, setTerminar] = useState(false);
   var [arregloImagenes, setArregloImagenes] = useState([]);
-  const buttons = () => {
-    if(terminar){
-      <div id="boton">
-        <button disabled={terminar} className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
-        <button disabled={!terminar} className="botongirar" onClick={handleOnClick}>Reiniciar</button>
-      </div>
-    } else{
-      <div id="boton">
-        <button disabled={!terminar} className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
-        <button disabled={terminar} className="botongirar" onClick={handleOnClick}>Reiniciar</button>
-      </div>
-    }
-  }
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const audioTombola = new Audio(sonidoTombola);
   
   function handleOnClick(){
+    audioTombola.play();
     // esto calcula el numero aleatorio
     var ran = arreglo.splice(Math.floor(Math.random() * (cuenta)), 1)[0];
     // resta uno a la cuenta de la cantidad de numeros que tiene el arreglo
@@ -35,22 +26,50 @@ function App() {
     // busco el gif y lo cambio en el path de la imagen
     setImagen('./assets/img/tombola.gif');
     // si la cuenta es 0 ya no se puede buscar un numero aleatorio
-    if(cuenta === 0){
-      alert('se terminaron las cartas')
-      setTerminar(true);
-    }else {
-      // detiene el tiempo 3 segundos para hacer aparecer el gif
-      setTimeout(function(){
-        // seteo el numero aleatorio a la variable random
-        setRandom(ran)
-        // busco imagen y la seteo para cambiarla en la pagina
-        searchImage(ran)
-      }, 2000)
+    if (cuenta === 1) { // Cambiado de 0 a 1
+      setTimeout(function() {
+        setRandom(ran);
+        searchImage(ran);
+        alert('Se terminaron las cartas');
+        setTerminar(true);
+      }, 3000);
+    } else {
+      setTimeout(function() {
+        setRandom(ran);
+        searchImage(ran);
+      }, 3000);
     }
-
-
-    
   }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 920) {
+        setIsMenuOpen(true);
+      } else {
+        setIsMenuOpen(false);
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Llamada inicial para establecer el estado correcto
+  
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+function handleReiniciar() {
+  // Reinicia todos los estados a sus valores iniciales
+  setCuenta(arreglo.length);
+  setRandom(undefined);
+  setImagen('./assets/img/tombola.png');
+  setTerminar(false);
+  setArregloImagenes([]);
+}
+
+
   function searchImage(numero){
     // voy a buscar el numero al imagenes.json y seteo el path de la imagen 
     // a la etiqueta img para que me muestre la foto de la carta
@@ -63,23 +82,41 @@ function App() {
       } 
     );
   }
+
   return (
     <div className="App">
-      <nav>
-          <input type="checkbox" id="check"/>
-          <label htmlFor="check" className="checkmenu">
-              <i className="fa-solid fa-bars-staggered"></i>
-          </label>
-              <a a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/" className="enlace">
-                <img src={logo} alt="lluvia logo" class="logo"/>
-              </a>
-          <ul>
-              <li><a className="active" href="https://www.lluviadeideaseditorial.com/">Inicio</a></li>
-              <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Nosotros</a></li>
-              <li><a href="#">Lotería de las Leyendas</a></li>
-              <li><a href="#">Contacto</a></li>
-          </ul>
-      </nav>
+<nav>
+  <input type="checkbox" id="check" />
+  <label htmlFor="check" className="checkmenu">
+    <i className="fa-solid fa-bars-staggered"></i>
+  </label>
+  <a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/" className="enlace">
+    <img src={logo} alt="lluvia logo" className="logo" />
+  </a>
+  <div className='container'>
+    {window.innerWidth > 920 ? (
+      <ul className="menu-items">
+        <li><a className="active" href="https://www.lluviadeideaseditorial.com/">Inicio</a></li>
+        <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Nosotros</a></li>
+        <li><a href="#">Lotería de las Leyendas</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    ) : (
+      <button className="menu-button" onClick={toggleMenu}>Menú</button>
+    )}
+  </div>
+</nav>
+<div className='menu-container'>
+    {/* Menu desplegable para pantallas pequeñas */}
+{window.innerWidth <= 920 && isMenuOpen && (
+  <ul className="menu-items-dropdown">
+    <li><a className="active" href="https://www.lluviadeideaseditorial.com/">Inicio</a></li>
+    <li><a href="https://www.lluviadeideaseditorial.com/lluvia-de-ideas-3/">Nosotros</a></li>
+    <li><a href="#">Lotería de las Leyendas</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+)}
+</div>
       <body>
         <header>
         <div className="titulo">
@@ -101,10 +138,20 @@ function App() {
                 <img src="img/1-03.jpg" alt="El Gringo"/>
                 <img src="img/1-04.jpg" alt="El Elote Loco"/> */}
             </div>
+            
             <div id="boton">
-              <button disabled={terminar} className="botongirar" onClick={handleOnClick}>Gira la tómbola</button>
-              {/* <button disabled={!terminar} className="botongirar" onClick={handleOnClick}>Reiniciar</button> */}
+                  {!terminar && (
+                    <button className="botongirar" onClick={handleOnClick}>
+                      Gira la tómbola
+                    </button>
+                  )}
+                  {(terminar || arregloImagenes.length > 0) && (
+                    <button className="botongirar" onClick={handleReiniciar}>
+                      Reiniciar
+                    </button>
+                  )}
             </div>
+            
             <ul className='lista'>
             {arregloImagenes.map(name => (
               <li>
